@@ -9,13 +9,14 @@
 
 .container {
   width: 1216px;
+  margin: 0 auto;  
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .input-container{
-    display: flex;
+  display: flex;
   align-items: center;
   gap: 10px;
   border: 1px solid var(--color-gray-300);
@@ -26,14 +27,14 @@
 }
 
 .input-style{
-    border: none;      
-    outline: none;  
-    font-size: 16px;
-    width: 400px;
+  border: none;      
+  outline: none;  
+  font-size: 16px;
+  width: 100%;  
 }
-.input-container:focus-within {
-   border: 3px solid var(--color-orange-500);
 
+.input-container:focus-within {
+  border: 3px solid var(--color-orange-500);
 }
 
 .logo-section {
@@ -59,17 +60,17 @@
 }
 
 .main-logo {
-    height: 40px;
-    width: 40px;
-    background-color: var(--color-orange-600);
-    border-radius: 10px;    
-
-    font-size: 20px;
-    color: white;
-    font-weight: bolder;
-    line-height: 40px;        
-    text-align: center;       
+  height: 40px;
+  width: 40px;
+  background-color: var(--color-orange-600);
+  border-radius: 10px;    
+  font-size: 20px;
+  color: white;
+  font-weight: bolder;
+  line-height: 40px;        
+  text-align: center;       
 }
+
 .logo {
   font-size: var(--text-xl);
   font-weight: var(--font-weight-semibold);
@@ -80,7 +81,7 @@
 .nav-menu {
   display: flex;
   gap: 32px;
-  margin-left: -50px;
+  /* margin-left: -50px;  - убираем, это плохая практика */
 }
 
 .nav-menu a {
@@ -107,9 +108,28 @@
   color: #333;
   cursor: pointer;
 }
+
 .search-icon {
   width: 20px;
   height: 20px;
   color: var(--color-gray-400);
   cursor: pointer;
+}
+
+@media(max-width: 48rem){
+  .input-container{
+    display: none;
+  }
+  .nav-menu{
+    display: none;
+  }
+}
+
+@media(max-width: 64rem){
+  .logo {
+    display: none;
+  }
+  .input-container{
+    width: 305px;
+  }
 }
