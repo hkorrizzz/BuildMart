@@ -2,15 +2,20 @@ import { LuMenu } from "react-icons/lu";
 import { RiSearchLine } from "react-icons/ri";
 import { LuShoppingCart } from "react-icons/lu";
 import { useState, useEffect } from "react"; 
-
+import { Link } from 'react-router-dom';
 import "./header.css"
 import "../../App.css"  
 
 export const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    
+
+        const closeMenu = () => {
+          setIsMenuOpen(false);
+        }; 
+
     useEffect(() => {
         const mediaQuery = window.matchMedia('(min-width: 48rem)');
+ 
         
         const changeSize = (e) => {
             if (e.matches) { 
@@ -41,13 +46,17 @@ export const Header = () => {
     return (
         <header className="header">
             <div className="header-container">
+              <Link to="/">
                 <div className="logo-section">
                     <div className="main-logo">BM</div>
                     <div className="logo">BuildMart</div>
                 </div>
+                </Link>
                 
                 <nav className="nav-menu">
-                    <a href="#">Products</a>
+                    <Link to="/">
+                    <a >Products</a>
+                    </Link>
                     <a href="#">Categories</a>
                     <a href="#">Deals</a>
                     <a href="#">About</a>
@@ -60,7 +69,9 @@ export const Header = () => {
                 
                 <div className="actions">
                     <RiSearchLine className="cart-icon hide" />
-                    <a href="/"><LuShoppingCart className="cart-icon" /></a>
+                    <Link to="/cart">
+                    <LuShoppingCart className="cart-icon" />
+                    </Link>
                     <LuMenu 
                         className="menu-icon hide" 
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -74,7 +85,9 @@ export const Header = () => {
                     <input type="text" placeholder="Search products..." className="input-style2" />
                 </div>
                 <div className="nav-menu2" style={{ flexDirection: "column", gap: "0px" }}>
-                    <a href="#" style={{ padding: "8px 0px" }}>Products</a>  
+                    <Link to="/" onClick={closeMenu}>
+                    <a style={{ padding: "8px 0px", display: "block" }}>Products</a>  
+                    </Link>
                     <a href="#" style={{ padding: "8px 0px" }}>Categories</a>
                     <a href="#" style={{ padding: "8px 0px" }}>Deals</a>
                     <a href="#" style={{ padding: "8px 0px" }}>About</a>

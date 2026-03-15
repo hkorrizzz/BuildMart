@@ -82,11 +82,15 @@
 .input-container:focus-within,  .input-container2:focus-within{
   border: 3px solid var(--color-orange-500);
 }
-
+a {
+  text-decoration: none;
+  color: inherit;
+}
 .logo-section {
   display: flex;
   align-items: center;
   gap: calc(var(--spacing)*2);
+  cursor: pointer ;
 }
 
 .circle {

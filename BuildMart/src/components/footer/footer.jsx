@@ -3,6 +3,7 @@ import { LuTwitter } from "react-icons/lu";
 import { LuInstagram } from "react-icons/lu";
 import { LuLinkedin } from "react-icons/lu";
 import { LuMail } from "react-icons/lu";
+import { Link } from "react-router-dom";
 import "./footer.css"
 
 export const Footer = () => {
@@ -24,7 +25,10 @@ export const Footer = () => {
                     <h3 class="title-container-1">Quick Links</h3>
                     <ul class = "footer-links">
                         <li><a href="#" class="sub-title">About Us</a></li>
-                        <li><a href="#" class="sub-title">Products</a></li>
+                        <li>
+                            <Link to="/">
+                                <a class="sub-title">Products</a> 
+                            </Link></li>
                         <li><a href="#" class="sub-title">Delivery Info</a></li>
                         <li><a href="#" class="sub-title">Returns Policy</a></li>
                         
