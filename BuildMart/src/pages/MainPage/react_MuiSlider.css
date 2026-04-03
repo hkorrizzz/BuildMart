@@ -1,0 +1,29 @@
+div .MuiSlider-track {
+    background-color: var(--color-black);
+    height: 16px;
+}
+
+div .MuiSlider-thumb {
+    width: 16px;    
+    height: 16px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-black);
+}
+div .MuiSlider-thumb[data-index="0"] {
+    margin-left: 8px;
+}
+div .MuiSlider-thumb[data-index="1"] {
+    margin-left: -8px;
+}
+div .MuiSlider-thumb.Mui-active {
+    outline: none;
+    box-shadow: none; 
+}
+div .MuiSlider-thumb:hover {
+    box-shadow: 0 0 0 4px rgba(175, 175, 175, 0.415);
+}   
+
+div .MuiSlider-rail {
+    background-color: #e0e0e0;  
+    height: 16px;
+}

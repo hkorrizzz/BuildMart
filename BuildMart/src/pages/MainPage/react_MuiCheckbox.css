@@ -1,0 +1,11 @@
+.rating-block .MuiCheckbox-root {
+    padding: 0;
+    margin: 0;
+    height: 16px;
+    width: 16px;
+    
+}
+
+.rating-block .MuiCheckbox-root.Mui-checked {
+    color: var(--color-black);
+}
