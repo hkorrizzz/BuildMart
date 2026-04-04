@@ -4,6 +4,8 @@ import { Checkbox } from '@mui/material';
 
 import { useState } from "react";
 
+import {Card} from "../../components/card/card";
+
 import "./MainPage.css"
 import "./react_MuiSlider.css"
 import "./react_MuiCheckbox.css"
@@ -37,6 +39,11 @@ export const MainPage = () => {
         setPriceRange([0, 349.99]);
     }
     
+
+    
+
+
+
     return (
         <div className = "main-container">
             <div className = "title">
@@ -109,6 +116,11 @@ export const MainPage = () => {
                         <button onClick={clearAllFilters}>Clear All Filters</button>
                     </div>  
                 </div>
+            </div>
+            <div  className = "cards-grid-container">
+                    {[...Array(6)].map((_, index) => (
+                    <Card key={index} />
+                ))}
             </div>
         </div>
     );

@@ -1,0 +1,83 @@
+.card-container{
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease; 
+}
+.card-container:hover{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.img-block{
+    aspect-ratio: 1;
+    overflow: hidden;
+    background-color: var(--color-gray-100);
+}
+.img-block img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+     transition: transform 0.3s ease;
+}
+.card-container:hover .img-block img {
+    transform: scale(1.05); 
+}
+
+.text-block{
+    padding: calc(var(--spacing) * 4);
+}
+.text-block a h3{
+    color: var(--color-gray-900);
+    margin-bottom: calc(var(--spacing) * 2);
+    font-weight: var(--font-weight-semibold);
+    height: 27px;
+    transition: color 0.2s ease; 
+}
+.card-container:hover .text-block a h3 {
+    color: var(--color-orange-600); 
+}
+
+.card-rating-block{
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * .5);
+}
+.card-rating-block span{
+    margin-left: calc(var(--spacing) * 2);
+    font-size: var(--text-sm);
+    line-height: 20px;
+}
+.price-txt{
+    margin-top: calc(var(--spacing)  * 3);
+    font-size: var(--text-2xl);
+    line-height: 32px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+}
+.category-txt{
+    margin-top: calc(var(--spacing) * 1);
+    color: var(--color-gray-500);
+    font-size: var(--text-sm);
+    line-height: 20px;
+}
+.text-block-button{
+    margin-top: calc(var(--spacing) * 4);
+    width: 100%;
+    padding-block: calc(var(--spacing) * 2);
+    font-size: var(--text-sm);
+    line-height: 20px;
+    color: var(--color-white);
+    background-color: var(--color-orange-600);
+    font-weight: var(--font-weight-medium);
+    border: 0;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+    transition: background-color 0.2s ease;
+}
+.text-block-button:hover{
+    background-color: var(--color-orange-700);
+}

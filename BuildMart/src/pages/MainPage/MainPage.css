@@ -155,7 +155,17 @@
     background-color: var(--color-orange-50);
 }
 
+.cards-grid-container{
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: calc(var(--spacing) * 6);
+}
 
+@media (min-width: 40rem) {
+    .cards-grid-container{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
 
 @media(min-width: 48rem){
     .main-container { 
@@ -178,5 +188,7 @@
     .main-container { 
         padding-inline: calc(var(--spacing) * 8);
     }
-
+    .cards-grid-container{
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }
