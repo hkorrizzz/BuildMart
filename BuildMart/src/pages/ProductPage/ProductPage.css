@@ -81,8 +81,10 @@
     height: 100%;
     object-fit: cover;
 }
-
-.product-tittle {
+.other-imgs button.active-img {
+    border: 2px solid var(--color-orange-600);
+}
+.product-tittle {   
     font-size: var(--text-3xl);
     margin-bottom: calc(var(--spacing) * 3);
     color: var(--color-gray-900);
