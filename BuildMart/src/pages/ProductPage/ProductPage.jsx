@@ -5,13 +5,18 @@ import { LuPackage, LuTruck, LuShield} from "react-icons/lu";
 import { LuShoppingCart } from "react-icons/lu";
 import { LuChevronDown } from "react-icons/lu";
 import { useState } from "react";
+import { useParams } from "react-router-dom"; 
 import { Card } from "../../components/card/card";
+import { Link } from "react-router-dom"; 
 
 import "./ProductPage.css"
 
 import productsJSON from "../../data/products.json";
 
 export const ProductPage = () => {
+    const { id } = useParams();
+    const product = productsJSON.products.find(p => p.id === parseInt(id));
+
     const [num, setNum] = useState(1);
     const incNum = () => {
         setNum(num + 1);
@@ -44,16 +49,16 @@ export const ProductPage = () => {
         );
     }
     
-    const s = productsJSON.products;
+    const relatedProducts = () => {
+        const currentProduct = productsJSON.products.find(p => p.id === parseInt(id));
+        if (!currentProduct || !currentProduct.relatedProductIds) return [];
+    
+         return productsJSON.products.filter(product => 
+        currentProduct.relatedProductIds.includes(product.id));
+    };
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const productImages = [
-        "https://images.unsplash.com/photo-1673297821205-e0575bbc2ab7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYWludCUyMGNhbnMlMjBjb25zdHJ1Y3Rpb24lMjBzdXBwbGllc3xlbnwxfHx8fDE3NzExODUyNzN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-        "https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYWludCUyMGNhbnN8ZW58MXx8fDE3NzExODUyNzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-        "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYWludGluZ3xlbnwxfHx8fDE3NzExODUyNzN8MA&ixlib=rb-4.1.0&q=80&w=1080"
-    ];
-        //"https://images.unsplash.com/photo-1673297821205-e0575bbc2ab7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYWludCUyMGNhbnMlMjBjb25zdHJ1Y3Rpb24lMjBzdXBwbGllc3xlbnwxfHx8fDE3NzExODUyNzN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-        //"https://images.unsplash.com/photo-1673297821205-e0575bbc2ab7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYWludCUyMGNhbnMlMjBjb25zdHJ1Y3Rpb24lMjBzdXBwbGllc3xlbnwxfHx8fDE3NzExODUyNzN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+    const productImages = product.images;
     const nextImage = () => {
         setCurrentImageIndex((prev) => 
             prev === productImages.length - 1 ? 0 : prev + 1
@@ -71,9 +76,9 @@ export const ProductPage = () => {
     return (
         <div className="productPage-container">
             <nav>
-                <a href="/">Products</a>
+                <Link to="/">Products</Link>
                 <span>/</span>
-                <span style={{ color: "var(--color-gray-900)" }}>Exterior Paint Set</span>
+                <span style={{ color: "var(--color-gray-900)" }}>{product.name}</span>
             </nav>
             
             <div className="productPage-info-container">
@@ -89,25 +94,25 @@ export const ProductPage = () => {
                         </button>
                     </div>
                     <div className="other-imgs">
-                        <button onClick={() =>selectImage(0)}>
+                        <button onClick={() =>selectImage(0)} className = {currentImageIndex === 0 ? 'active-img' : ''}>
                             <img src={productImages[0]}></img>
                         </button>
-                        <button onClick={() =>selectImage(1)}>
+                        <button onClick={() =>selectImage(1)} className = {currentImageIndex === 1 ? 'active-img' : ''}>
                             <img src={productImages[1]}></img>
                         </button>
-                        <button onClick={() =>selectImage(2)}>
+                        <button onClick={() =>selectImage(2)} className = {currentImageIndex === 2 ? 'active-img' : ''}>
                             <img src={productImages[2]}></img>
                         </button>
                     </div>
                 </div>
                 <div>
-                    <h1 className="product-tittle">Exterior Paint Set</h1>
+                    <h1 className="product-tittle">{product.name}</h1>
                     <div className="stars-section">
-                        {outputStars(3.5)}
-                        <span>(3.5)</span>
+                        {outputStars(product.rating)}
+                        <span>({product.rating})</span>
                     </div>
                     <div className="price-section">
-                        <span className="price-font">$45.99</span>
+                        <span className="price-font">${product.price}</span>
                         <span className="unit-font">/unit</span>
                     </div>
                     <div className="features-container">
@@ -115,21 +120,21 @@ export const ProductPage = () => {
                             <LuPackage className="features-icon"/>
                             <div>
                                 <p className="feature-tittle">Quality Assured</p>
-                                <p className="feature-description">Premium grade material</p>
+                                <p className="feature-description">{product.features["Quality Assured"]}</p>
                             </div>
                         </div>
                         <div className="sub-features-container">
                             <LuTruck className="features-icon"/>
                             <div>
                                 <p className="feature-tittle">Fast Delivery</p>
-                                <p className="feature-description">2-5 business days</p>
+                                <p className="feature-description">{product.features["Fast Delivery"]}</p>
                             </div>
                         </div>
                         <div className="sub-features-container">
                             <LuShield className="features-icon"/>
                             <div>
                                 <p className="feature-tittle">Warranty</p>
-                                <p className="feature-description">30-day guarantee</p>
+                                <p className="feature-description">{product.features["Warranty"]}</p>
                             </div>
                         </div>
                     </div>
@@ -151,7 +156,7 @@ export const ProductPage = () => {
                     <div className="description-container">
                         <h2>Description</h2>
                         <p>
-                            Professional-grade exterior paint set designed to withstand harsh weather conditions. This premium paint offers excellent coverage, durability, and color retention. Perfect for residential and commercial exterior surfaces.
+                            {product.description}
                         </p>
                     </div>
                     
@@ -162,41 +167,22 @@ export const ProductPage = () => {
                         </summary>
                         <div className="open-specifications-container">
                             <dl className="open-specifications-grid">
-                                <div className="specifications-element">
-                                    <dt>Volume</dt>
-                                    <dd>5 gallons total</dd>
-                                </div>
-                                <div className="specifications-element">
-                                    <dt>Type</dt>
-                                    <dd>100% Acrylic Latex</dd>
-                                </div>
-                                <div className="specifications-element">
-                                    <dt>Coverage</dt>
-                                    <dd>400 sq ft per gallon</dd>
-                                </div>
-                                <div className="specifications-element">
-                                    <dt>Finish</dt>
-                                    <dd>Satin</dd>
-                                </div>
-                                <div className="specifications-element">
-                                    <dt>Dry Time</dt>
-                                    <dd>2-4 hours</dd>
-                                </div>
-                                <div className="specifications-element">
-                                    <dt>Colors</dt>
-                                    <dd>Assorted neutral tones</dd>
-                                </div>
+                                {product.specifications.map((spec, index) => (
+                                    <div className="specifications-element" key={index}>
+                                        <dt>{spec.label}</dt>
+                                        <dd>{spec.value}</dd>
+                                    </div>
+                                ))}
                             </dl>
                         </div>
                     </details>
-                    
                 </div>  
             </div>
 
             <div className="related-products-container">
                 <h2>Related Products</h2>
                 <div className="related-products-grid">
-                    {s.map((product) => (
+                    {relatedProducts().map((product) => (
                         <Card 
                             key={product.id}
                             id={product.id}

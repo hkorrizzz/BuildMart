@@ -7,14 +7,14 @@
       "price": 45.99,
       "category": "Paint & Coatings",
       "description": "Professional-grade exterior paint set designed to withstand harsh weather conditions. This premium paint offers excellent coverage, durability, and color retention. Perfect for residential and commercial exterior surfaces.",
-      "specifications": {
-        "volume": "5 gallons total",
-        "type": "100% Acrylic Latex",
-        "coverage": "400 sq ft per gallon",
-        "finish": "Satin",
-        "dry_time": "2-4 hours",
-        "colors": "Assorted neutral tones"
-      },
+      "specifications": [
+        { "label": "Volume", "value": "5 gallons total" },
+        { "label": "Type", "value": "100% Acrylic Latex" },
+        { "label": "Coverage", "value": "400 sq ft per gallon" },
+        { "label": "Finish", "value": "Satin" },
+        { "label": "Dry Time", "value": "2-4 hours" },
+        { "label": "Colors", "value": "Assorted neutral tones" }
+      ],
       "features": {
         "Quality Assured": "Premium grade material",
         "Fast Delivery": "2-5 business days",
@@ -34,14 +34,14 @@
       "price": 52.99,
       "category": "Wood & Lumber",
       "description": "Versatile construction-grade plywood sheets suitable for a wide range of applications. These sheets are engineered for strength and dimensional stability, perfect for subfloors, roofing, walls, and general construction.",
-      "specifications": {
-        "dimensions": "4' x 8'",
-        "thickness": "3/4 inch",
-        "grade": "CDX",
-        "plies": "7-ply construction",
-        "exposure": "Exterior grade",
-        "veneer": "Softwood"
-      },
+      "specifications": [
+        { "label": "Dimensions", "value": "4' x 8'" },
+        { "label": "Thickness", "value": "3/4 inch" },
+        { "label": "Grade", "value": "CDX" },
+        { "label": "Plies", "value": "7-ply construction" },
+        { "label": "Exposure", "value": "Exterior grade" },
+        { "label": "Veneer", "value": "Softwood" }
+      ],
       "features": {
         "Quality Assured": "Premium grade material",
         "Fast Delivery": "2-5 business days",
@@ -61,14 +61,14 @@
       "price": 24.99,
       "category": "Cement & Concrete",
       "description": "High-quality Portland cement bags designed for heavy-duty construction projects. Our premium cement offers exceptional strength, durability, and workability. Ideal for foundations, structural work, and general concrete applications. Each bag contains precisely measured and tested cement that meets international quality standards.",
-      "specifications": {
-        "weight": "50 lbs per bag",
-        "type": "Portland Cement Type I/II",
-        "compressive_strength": "3500 PSI at 28 days",
-        "setting_time": "2-4 hours initial set",
-        "coverage": "Approximately 0.45 cubic feet",
-        "storage_life": "6 months in sealed bag"
-      },
+      "specifications": [
+        { "label": "Weight", "value": "50 lbs per bag" },
+        { "label": "Type", "value": "Portland Cement Type I/II" },
+        { "label": "Compressive Strength", "value": "3500 PSI at 28 days" },
+        { "label": "Setting Time", "value": "2-4 hours initial set" },
+        { "label": "Coverage", "value": "Approximately 0.45 cubic feet" },
+        { "label": "Storage Life", "value": "6 months in sealed bag" }
+      ],
       "features": {
         "Quality Assured": "Premium grade material",
         "Fast Delivery": "2-5 business days",
@@ -88,14 +88,14 @@
       "price": 89.99,
       "category": "Wood & Lumber",
       "description": "Premium kiln-dried lumber planks perfect for all your woodworking and construction needs. These high-grade wooden planks are carefully selected for strength and appearance. Suitable for framing, decking, furniture making, and various carpentry projects.",
-      "specifications": {
-        "dimensions": "2\" x 6\" x 8'",
-        "wood_type": "Douglas Fir",
-        "grade": "Premium Select",
-        "moisture_content": "15% kiln-dried",
-        "treatment": "Pressure-treated option available",
-        "quantity_sold": "Sold individually"
-      },
+      "specifications": [
+        { "label": "Dimensions", "value": "2\" x 6\" x 8'" },
+        { "label": "Wood Type", "value": "Douglas Fir" },
+        { "label": "Grade", "value": "Premium Select" },
+        { "label": "Moisture Content", "value": "15% kiln-dried" },
+        { "label": "Treatment", "value": "Pressure-treated option available" },
+        { "label": "Quantity Sold", "value": "Sold individually" }
+      ],
       "features": {
         "Quality Assured": "Premium grade material",
         "Fast Delivery": "2-5 business days",
@@ -115,14 +115,14 @@
       "price": 0.89,
       "category": "Bricks & Blocks",
       "description": "Traditional red clay bricks manufactured to the highest standards. These durable bricks are perfect for walls, patios, pathways, and architectural features. Fire-hardened for exceptional strength and weather resistance.",
-      "specifications": {
-        "dimensions": "8\" x 4\" x 2.25\"",
-        "material": "Fire-hardened clay",
-        "compressive_strength": "3000+ PSI",
-        "water_absorption": "Less than 8%",
-        "color": "Classic red",
-        "weight": "4.5 lbs per brick"
-      },
+      "specifications": [
+        { "label": "Dimensions", "value": "8\" x 4\" x 2.25\"" },
+        { "label": "Material", "value": "Fire-hardened clay" },
+        { "label": "Compressive Strength", "value": "3000+ PSI" },
+        { "label": "Water Absorption", "value": "Less than 8%" },
+        { "label": "Color", "value": "Classic red" },
+        { "label": "Weight", "value": "4.5 lbs per brick" }
+      ],
       "features": {
         "Quality Assured": "Premium grade material",
         "Fast Delivery": "2-5 business days",
@@ -142,14 +142,14 @@
       "price": 349.99,
       "category": "Steel & Metal",
       "description": "Heavy-duty structural steel I-beams engineered for maximum load-bearing capacity. These professional-grade beams are essential for large construction projects, building frames, and structural support applications.",
-      "specifications": {
-        "length": "20 feet",
-        "profile": "W10x49",
-        "material": "ASTM A992 Grade 50 Steel",
-        "weight": "980 lbs",
-        "yield_strength": "50 ksi",
-        "finish": "Mill finish"
-      },
+      "specifications": [
+        { "label": "Length", "value": "20 feet" },
+        { "label": "Profile", "value": "W10x49" },
+        { "label": "Material", "value": "ASTM A992 Grade 50 Steel" },
+        { "label": "Weight", "value": "980 lbs" },
+        { "label": "Yield Strength", "value": "50 ksi" },
+        { "label": "Finish", "value": "Mill finish" }
+      ],
       "features": {
         "Quality Assured": "Premium grade material",
         "Fast Delivery": "2-5 business days",

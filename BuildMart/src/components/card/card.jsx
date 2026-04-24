@@ -1,5 +1,6 @@
 import { LuShoppingCart } from "react-icons/lu";
 import { FaStar, FaStarHalf, FaRegStar } from 'react-icons/fa';
+import { Link } from "react-router-dom"; 
 import "./card.css"
 
 export const Card = ({id, name, rating, price, category, image}) => {
@@ -29,18 +30,20 @@ export const Card = ({id, name, rating, price, category, image}) => {
     return (
     <div className="card-container">
         <a href="">
+             <Link to={`/product/${id}`}> 
             <div className="img-block">
                 <img 
                 src={image}
                 />  
             </div>
+            </Link>
         </a>
         <div className="text-block">
-            <a href="">
+            <Link to={`/product/${id}`}> 
                 <h3>
                     {name}
                 </h3>
-            </a>
+            </Link>
             <div className="card-rating-block">
                 {outputStars(rating)}
                 <span>({rating})</span>
