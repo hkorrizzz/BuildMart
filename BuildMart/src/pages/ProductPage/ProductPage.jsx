@@ -27,6 +27,21 @@ export const ProductPage = () => {
         }
     }
     
+    const handleAddToCart = () => {
+        const cart = JSON.parse(localStorage.getItem("cart")) || {};
+        
+        if (cart[product.id]) {
+            cart[product.id].quantity += num;
+        } else {
+            cart[product.id] = {
+                id: product.id,
+                quantity: num
+            };
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        setNum(1);
+    }
+
     const outputStars = (nowRating) => {
         const fullStars = Math.floor(nowRating);
         const halfStar = (nowRating % 1) !== 0;
@@ -146,7 +161,7 @@ export const ProductPage = () => {
                             <button onClick={incNum}>+</button>
                         </div>
                     </div>
-                    <button className="add-to-card-btn">
+                    <button className="add-to-card-btn" onClick={handleAddToCart}>
                         <LuShoppingCart className="shoppingCart-icon"/>
                         Add to Cart 
                     </button>

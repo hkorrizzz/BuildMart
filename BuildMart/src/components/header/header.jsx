@@ -2,21 +2,67 @@ import { LuMenu } from "react-icons/lu";
 import { RiSearchLine } from "react-icons/ri";
 import { LuShoppingCart } from "react-icons/lu";
 import { useState, useEffect } from "react"; 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./header.css"
 import "../../App.css"  
 
 export const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [cartCount, setCartCount] = useState(0);
+    const [searchInput, setSearchInput] = useState('');
+    const navigate = useNavigate();
 
-        const closeMenu = () => {
-          setIsMenuOpen(false);
-        }; 
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    };
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        localStorage.setItem('searchQuery', searchInput.trim());
+        window.dispatchEvent(new Event('searchUpdated'));
+        
+        if (window.location.pathname !== '/') {
+            navigate('/');
+        }
+        closeMenu();
+    };
+
+    useEffect(() => {
+        const updateCartCount = () => {
+            const cart = JSON.parse(localStorage.getItem("cart")) || {};
+            const count = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+            setCartCount(count);
+        };
+
+        updateCartCount();
+
+        window.addEventListener('storage', updateCartCount);
+        
+        const interval = setInterval(updateCartCount, 1000);
+
+        return () => {
+            window.removeEventListener('storage', updateCartCount);
+            clearInterval(interval);
+        };
+    }, []);
+
+    useEffect(() => {
+        const updateCartCount = () => {
+            const cart = JSON.parse(localStorage.getItem("cart")) || {};
+            const count = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+            setCartCount(count);
+        };
+
+        window.addEventListener('cartUpdated', updateCartCount);
+        
+        return () => {
+            window.removeEventListener('cartUpdated', updateCartCount);
+        };
+    }, []);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia('(min-width: 48rem)');
  
-        
         const changeSize = (e) => {
             if (e.matches) { 
                 setIsMenuOpen(false); 
@@ -46,31 +92,36 @@ export const Header = () => {
     return (
         <header className="header">
             <div className="header-container">
-              <Link to="/">
-                <div className="logo-section">
-                    <div className="main-logo">BM</div>
-                    <div className="logo">BuildMart</div>
-                </div>
+                <Link to="/">
+                    <div className="logo-section">
+                        <div className="main-logo">BM</div>
+                        <div className="logo">BuildMart</div>
+                    </div>
                 </Link>
                 
                 <nav className="nav-menu">
-                    <Link to="/">
-                    <a >Products</a>
-                    </Link>
+                    <Link to="/">Products</Link>
                     <a href="#">Categories</a>
                     <a href="#">Deals</a>
                     <a href="#">About</a>
                 </nav>
                 
-                <div className="input-container">
+                <form className="input-container" onSubmit={handleSearch}>
                     <RiSearchLine className="search-icon"/>
-                    <input type="text" placeholder="Search products..." className="input-style" />
-                </div>
+                    <input 
+                        type="text" 
+                        placeholder="Search products..." 
+                        className="input-style" 
+                        value={searchInput}
+                        onChange={(e) => setSearchInput(e.target.value)}
+                    />
+                </form>
                 
                 <div className="actions">
                     <RiSearchLine className="cart-icon hide" />
                     <Link to="/cart">
-                    <LuShoppingCart className="cart-icon" />
+                        <LuShoppingCart className="cart-icon" />
+                        <span>{cartCount}</span>
                     </Link>
                     <LuMenu 
                         className="menu-icon hide" 
@@ -80,13 +131,19 @@ export const Header = () => {
             </div>
             
             <nav className={`md-nav ${isMenuOpen ? 'show' : 'hide-button'}`}>
-                <div className="input-container2">
+                <form className="input-container2" onSubmit={handleSearch}>
                     <RiSearchLine className="search-icon" />
-                    <input type="text" placeholder="Search products..." className="input-style2" />
-                </div>
+                    <input 
+                        type="text" 
+                        placeholder="Search products..." 
+                        className="input-style2" 
+                        value={searchInput}
+                        onChange={(e) => setSearchInput(e.target.value)}
+                    />
+                </form>
                 <div className="nav-menu2" style={{ flexDirection: "column", gap: "0px" }}>
                     <Link to="/" onClick={closeMenu}>
-                    <a style={{ padding: "8px 0px", display: "block" }}>Products</a>  
+                        <a style={{ padding: "8px 0px", display: "block" }}>Products</a>  
                     </Link>
                     <a href="#" style={{ padding: "8px 0px" }}>Categories</a>
                     <a href="#" style={{ padding: "8px 0px" }}>Deals</a>

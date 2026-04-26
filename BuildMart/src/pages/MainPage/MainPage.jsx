@@ -1,8 +1,7 @@
 import { LuSlidersHorizontal } from "react-icons/lu";
 import { Slider } from '@mui/material';
 import { Checkbox } from '@mui/material';
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {Card} from "../../components/card/card";
 
@@ -14,6 +13,7 @@ import productsJSON from "../../data/products.json";
 
 export const MainPage = () => {
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const [rating5Stars, setRating5Stars] = useState(false);
     const [rating4Stars, setRating4Stars] = useState(false);
@@ -40,11 +40,33 @@ export const MainPage = () => {
         setRating3Stars(false);
         setPriceRange([0, 349.99]);
         setSortBy("name-asc");
+        setSearchQuery('');
     }
+
+    useEffect(() => {
+        const handleSearch = (e) => {
+            setSearchQuery(e.detail);
+        };
+
+        window.addEventListener('searchProducts', handleSearch);
+        
+        return () => {
+            window.removeEventListener('searchProducts', handleSearch);
+        };
+    }, []);
     
     const allProducts = productsJSON.products;
     
     const products = allProducts.filter(product => {
+        if (searchQuery) {
+            const query = searchQuery.toLowerCase();
+            const matchesSearch = 
+                product.name.toLowerCase().includes(query) ||
+                product.category.toLowerCase().includes(query) ||
+                product.description.toLowerCase().includes(query);
+            if (!matchesSearch) return false;
+        }
+        
         if (rating5Stars && product.rating < 5) return false;
         if (rating4Stars && product.rating < 4) return false;
         if (rating3Stars && product.rating < 3) return false;
@@ -52,8 +74,7 @@ export const MainPage = () => {
         if (product.price < priceRange[0] || product.price > priceRange[1]) return false;
         
         return true;
-    }
-    );
+    });
 
     const [sortBy, setSortBy] = useState("name-asc");
     
@@ -61,13 +82,12 @@ export const MainPage = () => {
         const sorted = [...products];
         if (sortBy == "price-asc") return sorted.sort((a, b) => a.price - b.price);
         if (sortBy == "price-desc") return sorted.sort((a, b) => b.price - a.price);
-        return sorted.sort((a, b) => a.name.localeCompare(b.name));;
+        return sorted.sort((a, b) => a.name.localeCompare(b.name));
     }
 
     const sortProductsChange = (event) => {
         setSortBy(event.target.value);
     }
-
 
     return (
         <div className = "main-container">  
@@ -75,13 +95,19 @@ export const MainPage = () => {
                 <h1>Building Materials</h1>
                 <p>Premium construction supplies for all your projects</p>
             </div>
+
             <div className = "filters-container">
                 <div className = "show-filters-section">
                     <button onClick={() => setIsFiltersOpen(!isFiltersOpen)}>
                         <LuSlidersHorizontal />
                         {isFiltersOpen ? 'Hide Filters' : 'Show Filters'}      
                     </button>
-                    <p>Showing 6 products</p>
+                    <p>
+                        {searchQuery 
+                            ? `Found ${products.length} products for "${searchQuery}"` 
+                            : `Showing ${products.length} products`
+                        }
+                    </p>
                 </div>
                 <div className = "sort-by-container">
                     <label>Sort by:</label>
@@ -145,19 +171,27 @@ export const MainPage = () => {
                     </div>  
                 </div>
             </div>
-            <div  className = "cards-grid-container">
+
+            {products.length > 0 ? (
+                <div className = "cards-grid-container">
                     {sortedProducts().map((product) => (
-                    <Card 
-                    key={product.id}
-                    id = {product.id}
-                    name ={product.name}
-                    rating = {product.rating}
-                    price = {product.price}
-                    category = {product.category}
-                    image = {product.images[0]}
-                     />
-                ))}
-            </div> 
+                        <Card 
+                            key={product.id}
+                            id = {product.id}
+                            name ={product.name}
+                            rating = {product.rating}
+                            price = {product.price}
+                            category = {product.category}
+                            image = {product.images[0]}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <div className="no-products-block">
+                    <p>No products match your filters.</p>
+                    <button onClick={clearAllFilters}>Clear filters</button>
+                </div>
+            )}
         </div>
     );
 }
