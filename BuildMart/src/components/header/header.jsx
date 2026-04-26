@@ -106,7 +106,7 @@ export const Header = () => {
     return (
         <header className="header">
             <div className="header-container">
-                <Link to="/">
+                <Link to="/BuildMart">
                     <div className="logo-section">
                         <div className="main-logo">BM</div>
                         <div className="logo">BuildMart</div>
@@ -114,7 +114,7 @@ export const Header = () => {
                 </Link>
                 
                 <nav className="nav-menu">
-                    <Link to="/">Products</Link>
+                    <Link to="/BuildMart">Products</Link>
                     <a href="#">Categories</a>
                     <a href="#">Deals</a>
                     <a href="#">About</a>
