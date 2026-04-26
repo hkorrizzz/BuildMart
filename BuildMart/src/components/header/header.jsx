@@ -142,8 +142,8 @@ export const Header = () => {
                     />
                 </form>
                 <div className="nav-menu2" style={{ flexDirection: "column", gap: "0px" }}>
-                    <Link to="/" onClick={closeMenu}>
-                        <a style={{ padding: "8px 0px", display: "block" }}>Products</a>  
+                    <Link to="/" onClick={closeMenu}style={{ padding: "8px 0px", display: "block" }}>
+                        Products
                     </Link>
                     <a href="#" style={{ padding: "8px 0px" }}>Categories</a>
                     <a href="#" style={{ padding: "8px 0px" }}>Deals</a>

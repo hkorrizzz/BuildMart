@@ -15,13 +15,13 @@ export const Card = ({id, name, rating, price, category, image}) => {
         return(
             <>
                 {[...Array(fullStars)].map((_, i) => (
-                    <FaStar color="#ffc107" />
+                    <FaStar key={`full-${i}`} color="#ffc107" />
                 ))}
                 {halfStar && (
                     <FaStarHalf key="half" color="#ffc107" />
                 )}
                 {[...Array(emptyStars())].map((_, i) => (
-                    <FaRegStar color="#e4e5e9" />
+                    <FaRegStar key={`empty-${i}`} color="#e4e5e9" />
                 ))}
             </>
         );
@@ -43,7 +43,7 @@ export const Card = ({id, name, rating, price, category, image}) => {
 
     return (
     <div className="card-container">
-        <a href="">
+       
              <Link to={`/product/${id}`}> 
             <div className="img-block">
                 <img 
@@ -51,7 +51,7 @@ export const Card = ({id, name, rating, price, category, image}) => {
                 />  
             </div>
             </Link>
-        </a>
+        
         <div className="text-block">
             <Link to={`/product/${id}`}> 
                 <h3>
