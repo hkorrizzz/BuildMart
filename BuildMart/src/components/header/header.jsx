@@ -3,6 +3,7 @@ import { RiSearchLine } from "react-icons/ri";
 import { LuShoppingCart } from "react-icons/lu";
 import { useState, useEffect } from "react"; 
 import { Link, useNavigate } from 'react-router-dom';
+import { Toast } from "../../components/notification/notification"; 
 import "./header.css"
 import "../../App.css"  
 
@@ -10,6 +11,8 @@ export const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [cartCount, setCartCount] = useState(0);
     const [searchInput, setSearchInput] = useState('');
+    const [toastMessage, setToastMessage] = useState('');
+    const [showToast, setShowToast] = useState(false);
     const navigate = useNavigate();
 
     const closeMenu = () => {
@@ -18,14 +21,25 @@ export const Header = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        localStorage.setItem('searchQuery', searchInput.trim());
-        window.dispatchEvent(new Event('searchUpdated'));
+        window.dispatchEvent(new CustomEvent('searchProducts', { 
+            detail: searchInput.trim() 
+        }));
         
         if (window.location.pathname !== '/') {
             navigate('/');
         }
         closeMenu();
     };
+
+    useEffect(() => {
+        const handleShowToast = (e) => {
+            setToastMessage(e.detail);
+            setShowToast(true);
+        };
+
+        window.addEventListener('showToast', handleShowToast);
+        return () => window.removeEventListener('showToast', handleShowToast);
+    }, []);
 
     useEffect(() => {
         const updateCartCount = () => {
@@ -142,7 +156,11 @@ export const Header = () => {
                     />
                 </form>
                 <div className="nav-menu2" style={{ flexDirection: "column", gap: "0px" }}>
-                    <Link to="/" onClick={closeMenu}style={{ padding: "8px 0px", display: "block" }}>
+                    <Link 
+                        to="/" 
+                        onClick={closeMenu}
+                        style={{ padding: "8px 0px", display: "block" }}
+                    >
                         Products
                     </Link>
                     <a href="#" style={{ padding: "8px 0px" }}>Categories</a>
@@ -150,6 +168,12 @@ export const Header = () => {
                     <a href="#" style={{ padding: "8px 0px" }}>About</a>
                 </div>
             </nav>
+
+            <Toast 
+                message={toastMessage}
+                isVisible={showToast}
+                onClose={() => setShowToast(false)}
+            />
         </header>
     );
 }
