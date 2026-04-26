@@ -151,7 +151,25 @@ a {
   align-items: center;
   gap: 32px;
 }
-
+.actions a {
+    position: relative;
+    display: inline-flex;
+}
+.actions a span {
+    position: absolute;
+    color: var(--color-white);
+    top: -12px;
+    right: -12px;
+    background-color: var(--color-orange-600);
+    font-size: var(--text-xs);
+    line-height: 16px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .cart-icon, .menu-icon {
   width: 20px;
   height: 20px;

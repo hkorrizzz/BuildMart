@@ -27,6 +27,20 @@ export const Card = ({id, name, rating, price, category, image}) => {
         );
     }
 
+    const handleAddToCart = () => {
+        const cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+        if (cart[id]) {
+            cart[id].quantity += 1;
+        } else {
+            cart[id] = {
+                id: id,
+                quantity: 1 
+            };
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+    };
+
     return (
     <div className="card-container">
         <a href="">
@@ -54,7 +68,7 @@ export const Card = ({id, name, rating, price, category, image}) => {
             <p className="category-txt">
                 {category}
             </p>
-            <button className="text-block-button">
+            <button className="text-block-button" onClick={handleAddToCart}>
                 <LuShoppingCart/>
                 Add to Cart 
             </button>
