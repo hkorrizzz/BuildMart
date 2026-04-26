@@ -39,6 +39,11 @@ export const Card = ({id, name, rating, price, category, image}) => {
             };
         }
         localStorage.setItem("cart", JSON.stringify(cart));
+        
+        window.dispatchEvent(new Event('cartUpdated'));
+        window.dispatchEvent(new CustomEvent('showToast', { 
+            detail: `${name} added to cart!` 
+        }));
     };
 
     return (
